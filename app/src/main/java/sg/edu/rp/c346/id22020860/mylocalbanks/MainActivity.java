@@ -1,9 +1,12 @@
 package sg.edu.rp.c346.id22020860.mylocalbanks;
 
+import static sg.edu.rp.c346.id22020860.mylocalbanks.R.color.red;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -16,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     TextView DBS;
     TextView OCBC;
     TextView UOB;
+
+    MenuItem favouriteMenuItem;
+    boolean isFavourite = false;
 
     String wordClicked = "";
     @Override
@@ -37,9 +43,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
         return true;
     }
-
+  /*  public void updateToggleMenuItemTitle() {
+        if (isToggleOn) {
+            toggle.setTitle("Add to Favourites");
+        } else {
+            toggle.setTitle("Remove from favourites");
+        }
+    }
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,7 +94,22 @@ public class MainActivity extends AppCompatActivity {
             wordClicked = "uob";
         }
 
+        favouriteMenuItem = menu.findItem(R.id.bankToggleFav);
+
+
+        if (!isFavourite){
+            favouriteMenuItem.setTitle("Add to Favorite");
+        }
+        else{
+            favouriteMenuItem.setTitle("Remove Favorite");
+            DBS.setTextColor(Color.BLACK);
+            OCBC.setTextColor(Color.BLACK);
+            UOB.setTextColor(Color.BLACK);
+        }
+
     }
+
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(wordClicked.equalsIgnoreCase("dbs")) {
@@ -95,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentCall = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + "18001111111"));
                 startActivity(intentCall);
                 return true; //menu item successfully handled
+            }else if(id == R.id.bankToggleFav){
+                DBS.setTextColor(Color.parseColor("#cd5c5c"));
+                OCBC.setTextColor(Color.BLACK);
+                UOB.setTextColor(Color.BLACK);
+                isFavourite = !isFavourite;
+                //updateToggleMenuItemTitle();
+
+
             }
         }
         else if(wordClicked.equalsIgnoreCase("ocbc")) {
@@ -110,6 +147,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentCall);
                 return true; //menu item successfully handled
             }
+            else if(id == R.id.bankToggleFav){
+                OCBC.setTextColor(Color.parseColor("#cd5c5c"));
+                DBS.setTextColor(Color.BLACK);
+                UOB.setTextColor(Color.BLACK);
+        }
+
         }
         else if(wordClicked.equalsIgnoreCase("uob")) {
             int id = item.getItemId();
@@ -123,6 +166,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentCall = new Intent(Intent.ACTION_CALL,Uri.parse("tel:" + "18002222121"));
                 startActivity(intentCall);
                 return true; //menu item successfully handled
+            }
+            else if(id == R.id.bankToggleFav){
+                UOB.setTextColor(Color.parseColor("#cd5c5c"));
+                OCBC.setTextColor(Color.BLACK);
+                DBS.setTextColor(Color.BLACK);
+
+
+
             }
         }
 

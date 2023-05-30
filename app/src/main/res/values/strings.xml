@@ -5,7 +5,7 @@
     <string name="uob">UOB</string>
     <string name="English">English</string>
     <string name="Chinese">Chinese</string>
-    <string name="Arab">Arab</string>
     <string name="contact">Contact Number</string>
     <string name="website">Bank Website</string>
+    <string name="favourite">Toggle Favourite</string>
 </resources>

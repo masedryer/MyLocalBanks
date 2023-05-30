@@ -8,5 +8,9 @@
         android:id="@+id/bankContactNumber"
         android:orderInCategory="101"
         android:title="@string/contact" />
+    <item
+        android:id="@+id/bankToggleFav"
+        android:orderInCategory="101"
+        android:title="@string/favourite" />
 
 </menu>
